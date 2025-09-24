@@ -1,0 +1,128 @@
+[
+  {
+    "testCase": "TC007",
+    "category": "valid-songs",
+    "description": "Valid song data for positive testing",
+    "data": {
+      "title": "Test Song Alpha",
+      "artist": "Test Artist One", 
+      "releaseDate": "2023-01-15",
+      "price": 1.99
+    },
+    "expectedResult": "success"
+  },
+  {
+    "testCase": "TC007",
+    "category": "valid-songs", 
+    "description": "Valid song with special characters",
+    "data": {
+      "title": "Café München (Remix)",
+      "artist": "Björk & The Sïgur Rós",
+      "releaseDate": "2022-12-25", 
+      "price": 2.49
+    },
+    "expectedResult": "success"
+  },
+  {
+    "testCase": "TC008",
+    "category": "invalid-songs",
+    "description": "Missing title field",
+    "data": {
+      "title": "",
+      "artist": "Test Artist",
+      "releaseDate": "2023-01-01",
+      "price": 1.99
+    },
+    "expectedResult": "validation-error",
+    "expectedError": "Title is required"
+  },
+  {
+    "testCase": "TC009", 
+    "category": "invalid-dates",
+    "description": "Invalid date format",
+    "data": {
+      "title": "Test Song",
+      "artist": "Test Artist", 
+      "releaseDate": "32/13/2023",
+      "price": 1.99
+    },
+    "expectedResult": "validation-error",
+    "expectedError": "Invalid date format"
+  },
+  {
+    "testCase": "TC010",
+    "category": "invalid-prices",
+    "description": "Negative price",
+    "data": {
+      "title": "Test Song", 
+      "artist": "Test Artist",
+      "releaseDate": "2023-01-01",
+      "price": -5.99
+    },
+    "expectedResult": "validation-error", 
+    "expectedError": "Price must be positive"
+  },
+  {
+    "testCase": "TC025-TC030",
+    "category": "filter-dates",
+    "description": "Date filtering test data",
+    "data": {
+      "filterDate": "2023-01-15",
+      "expectedMatches": 2,
+      "expectedTitles": ["Song A", "Song B"]
+    },
+    "expectedResult": "filtered-results"
+  },
+  {
+    "testCase": "TC031-TC040", 
+    "category": "sorting-data",
+    "description": "Sorting validation data",
+    "data": {
+      "sortField": "title",
+      "sortOrder": "asc",
+      "expectedFirstTitle": "A Song Title",
+      "expectedLastTitle": "Z Song Title"
+    },
+    "expectedResult": "sorted-results"
+  },
+  {
+    "testCase": "Performance",
+    "category": "edge-cases",
+    "description": "Large dataset for performance testing", 
+    "data": {
+      "songCount": 100,
+      "bulkData": true,
+      "generateRandom": true
+    },
+    "expectedResult": "performance-baseline"
+  },
+  {
+    "testCase": "Security",
+    "category": "xss-payloads",
+    "description": "XSS testing payloads",
+    "data": {
+      "title": "<script>alert('XSS')</script>",
+      "artist": "javascript:alert('XSS')",
+      "maliciousInputs": [
+        "<img src=x onerror=alert('XSS')>",
+        "\"><script>alert('XSS')</script>",
+        "<svg onload=alert('XSS')>"
+      ]
+    },
+    "expectedResult": "sanitized-input"
+  },
+  {
+    "testCase": "Accessibility",
+    "category": "a11y-test-data", 
+    "description": "Accessibility testing scenarios",
+    "data": {
+      "screenReaderText": "Add new song to library",
+      "keyboardNavigation": ["Tab", "Enter", "Escape"],
+      "colorContrast": {
+        "minRatio": 4.5,
+        "testElements": ["button", "input", "table-header"]
+      }
+    },
+    "expectedResult": "wcag-compliant"
+  }
+]
